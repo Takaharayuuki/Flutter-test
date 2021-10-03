@@ -9,6 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '会社名ランダム生成メーカー',
+      theme: ThemeData(
+        primaryColor: Colors.greenAccent,
+      ),
       home: RandomWords(),
     );
   }
@@ -22,7 +25,6 @@ class _RandomWordsState extends State<RandomWords> {
   void _pushSaved() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
-        // NEW lines from here...
         builder: (BuildContext context) {
           final tiles = _saved.map(
                 (WordPair pair) {
@@ -41,11 +43,11 @@ class _RandomWordsState extends State<RandomWords> {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text('Saved Suggestions'),
+              title: Text('お気に入り登録一覧'),
             ),
             body: ListView(children: divided),
           );
-        }, // ...to here.
+        },
       ),
     );
   }
