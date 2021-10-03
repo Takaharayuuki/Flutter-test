@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '名前ランダム生成メーカー',
+      title: '会社名ランダム生成メーカー',
       home: RandomWords(),
     );
   }
@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
 
 class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
+  final _saved = <WordPair>{};
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   Widget _buildSuggestions() {
@@ -31,18 +32,23 @@ class _RandomWordsState extends State<RandomWords> {
         });
   }
   Widget _buildRow(WordPair pair){
+    final alreadySaved = _saved.contains(pair);
     return ListTile(
       title: Text(
         pair.asPascalCase,
         style: _biggerFont,
-      )
+      ),
+      trailing: Icon(
+        alreadySaved ? Icons.favorite : Icons.favorite_border,
+        color: alreadySaved ? Colors.red : null,
+      ),
     );
   }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('名前ランダム生成メーカー')
+          title: const Text('会社名ランダム生成メーカー')
         ),
         body: _buildSuggestions(),
     );
